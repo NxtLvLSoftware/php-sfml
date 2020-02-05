@@ -1,0 +1,5 @@
+name: "php-sfml-build"
+description: "Build & test the php-sfml extension."
+runs:
+  using: "docker"
+  image: "Dockerfile"
