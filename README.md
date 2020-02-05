@@ -31,7 +31,7 @@ to your _php.ini_ file.
 
 ## Documentation
 
-The SFML extension aims to mimic almost every single aspect of the official C library, so until we write our own documentation,
+The SFML extension aims to mimic almost every single aspect of the official C++ library, so until we write our own documentation,
 refer to the [C++ counterpart](https://www.sfml-dev.org/documentation/).
 
 ### Example
@@ -39,7 +39,7 @@ refer to the [C++ counterpart](https://www.sfml-dev.org/documentation/).
 Currently the only bindings available are for the SFML version consts/defines:
 
 ```php
-echo sprintf("Using SMFL v%d.%d.%d", SFML_VERSION_MAJOR, SFML_VERSION_MINOR, SFML_VERSION_PATCH) . PHP_EOL;
+echo sprintf("Using SFML v%d.%d.%d", SFML_VERSION_MAJOR, SFML_VERSION_MINOR, SFML_VERSION_PATCH) . PHP_EOL;
 ```
 
 ### Developing
@@ -47,4 +47,4 @@ If you're using an IDE like PHPStorm you can add the [stubs directory](/stubs) t
 
 ## Support and feature requests
 Please submit anything that requires our attention to our [issue tracker](https://github.com/NxtLvLSoftware/php-sfml/issues)
-onGithub. We will attempt to respond to sensible requests in a reasonable time frame.
+on Github. We will attempt to respond to sensible requests in a reasonable time frame.
