@@ -5,9 +5,7 @@
 #ifndef PHP_SFML_CONFIG_H
 #define PHP_SFML_CONFIG_H
 
-extern "C" {
-#include "../php_sfml.h"
-}
+#include "zend_util.h"
 
 PHP_MINIT_FUNCTION(sfml_config);
 
