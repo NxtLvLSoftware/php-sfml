@@ -63,7 +63,8 @@ if test "$PHP_SFML" != "no"; then
 
   PHP_SUBST(SFML_SHARED_LIBADD)
 
-  PHP_NEW_EXTENSION(sfml, php_sfml.cpp src/config.cpp, $ext_shared,, -DZEND_ENABLE_STATIC_TSRMLS_CACHE=1 -std=c++11)
+  SFML_SOURCE_FILES="`find src -name "*.cpp"`"
+  PHP_NEW_EXTENSION(sfml, php_sfml.cpp $SFML_SOURCE_FILES, $ext_shared,, -DZEND_ENABLE_STATIC_TSRMLS_CACHE=1 -std=c++11)
   PHP_ADD_BUILD_DIR($ext_builddir/src, 1)
   PHP_ADD_INCLUDE($ext_builddir)
 fi
