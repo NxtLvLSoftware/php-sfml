@@ -44,6 +44,7 @@ PHP_MSHUTDOWN_FUNCTION(sfml)
 /* {{{ sdl_functions[] */
 static zend_function_entry sfml_functions[] = {
     // system
+    ZEND_NS_FE("sf", sleep, arginfo_Sleep_sleep)
     ZEND_NS_FE("sf", seconds, arginfo_Time_seconds)
     ZEND_NS_FE("sf", milliseconds, arginfo_Time_milliseconds)
     ZEND_NS_FE("sf", microseconds, arginfo_Time_microseconds)

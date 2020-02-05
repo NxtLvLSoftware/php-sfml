@@ -1,6 +1,8 @@
 <?php
 
 namespace sf {
+function sleep(\sf\Time $duration) : void{}
+
 function seconds(float $seconds) : \sf\Time{}
 
 function milliseconds(int $seconds) : \sf\Time{}

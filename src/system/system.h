@@ -6,6 +6,7 @@
 #define PHP_SFML_SYSTEM_H
 
 #include "clock.h"
+#include "sleep.h"
 #include "time.h"
 
 PHP_MINIT_FUNCTION(sfml_system) {
