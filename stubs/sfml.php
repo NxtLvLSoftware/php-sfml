@@ -9,6 +9,17 @@ function microseconds(int $seconds) : \sf\Time{}
 }
 
 namespace sf {
+class Clock{
+
+	public function __construct(){}
+
+	public function getElapsedTime() : \sf\Time{}
+
+	public function restart() : \sf\Time{}
+}
+}
+
+namespace sf {
 class Time{
 
 	public function __construct(){}

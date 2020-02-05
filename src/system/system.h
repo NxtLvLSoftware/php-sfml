@@ -5,10 +5,14 @@
 #ifndef PHP_SFML_SYSTEM_H
 #define PHP_SFML_SYSTEM_H
 
+#include "clock.h"
 #include "time.h"
 
 PHP_MINIT_FUNCTION(sfml_system) {
-    if (PHP_MINIT_CALL(sfml_system_time) == SUCCESS){
+    if (
+            PHP_MINIT_CALL(sfml_system_clock) == SUCCESS &&
+            PHP_MINIT_CALL(sfml_system_time) == SUCCESS
+            ){
         return SUCCESS;
     }
 
