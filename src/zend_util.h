@@ -9,8 +9,10 @@ extern "C"{
 #include "../php_sfml.h"
 };
 
+#ifndef CLASS_NAME
 #define CLASS_NAME M_CONC(Php, CLASS_TYPE)
-#define ARG_INFO_PREFIX M_CONC(arginfo_, M_CONC(CLASS_TYPE, _))
+#endif
+#define ARG_INFO_PREFIX M_CONC(arginfo_, M_CONC(CLASS_NAME, _))
 
 /**
  * A simple struct for keeping track of a zend classes flags.
