@@ -2,20 +2,18 @@
 // Created by Jack Noordhuis on 4/2/20.
 //
 
-extern "C" {
-#include "php_sfml.h" // this one has to be C always, so the engine can understand it
-}
-
 #include "src/config.h"
-
-#define PHP_MINIT_CALL(func) PHP_MINIT(func)(INIT_FUNC_ARGS_PASSTHRU)
+#include "src/system/system.h"
 
 /* {{{ PHP_MINIT_FUNCTION
  */
 PHP_MINIT_FUNCTION(sfml)
 {
     // register php things
-    if(PHP_MINIT_CALL(sfml_config) == SUCCESS){
+    if(
+            PHP_MINIT_CALL(sfml_config) == SUCCESS &&
+            PHP_MINIT_CALL(sfml_system) == SUCCESS
+            ){
         return SUCCESS;
     }
 
@@ -41,12 +39,22 @@ PHP_MSHUTDOWN_FUNCTION(sfml)
 }
 /* }}} */
 
+/* {{{ sdl_functions[] */
+static zend_function_entry sfml_functions[] = {
+    // system
+    ZEND_NS_FE("sf", seconds, arginfo_Time_seconds)
+    ZEND_NS_FE("sf", milliseconds, arginfo_Time_milliseconds)
+    ZEND_NS_FE("sf", microseconds, arginfo_Time_microseconds)
+    ZEND_FE_END
+};
+/* }}} */
+
 /* {{{ sfml_module_entry
  */
 zend_module_entry sfml_module_entry = {
         STANDARD_MODULE_HEADER,
         "sfml",				    /* Extension name */
-        NULL,				                /* zend_function_entry */
+        sfml_functions,				                /* zend_function_entry */
         PHP_MINIT(sfml),		    /* PHP_MINIT - Module initialization */
         PHP_MSHUTDOWN(sfml),	    /* PHP_MSHUTDOWN - Module shutdown */
         NULL,				                /* PHP_RINIT - Request initialization */
