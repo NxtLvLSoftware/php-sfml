@@ -135,21 +135,53 @@ static inline zend_class_entry *register_zend_class(zend_object_handlers *handle
 // Macros for the starting definition of a class.
 
 /*
- * Defines class entry pointer.
+ * Defines class entry pointer using the name declared with #define CLASS_NAME.
  */
 #define PHP_CLASS_ENTRY() \
-    zend_class_entry *M_CONC(CLASS_NAME, _entry)
+    PHP_CLASS_ENTRY_NAME(CLASS_NAME)
 
 /*
- * Defines class entry pointer and handler list for constructing php land objects.
+ * Defines class entry pointer using the specified name.
+ */
+#define PHP_CLASS_ENTRY_NAME(name) \
+    zend_class_entry *M_CONC(name, _entry)
+
+/*
+ * Defines an extern entry pointer for referencing a php class not defined in the current scope.
+ */
+#define EXTERN_PHP_CLASS_ENTRY(name) \
+    extern PHP_CLASS_ENTRY_NAME(name)
+
+/*
+ * Defines class entry pointer and handler list for constructing php land objects using the name and type specified in #defines.
  */
 #define PHP_CLASS_ENTRY_EX() \
     PHP_CLASS_ENTRY(); \
-    zend_object_handlers M_CONC(php_, M_CONC(CLASS_NAME, _handlers)); \
-    static zend_object *M_CONC(allocate_, M_CONC(CLASS_NAME, _zend_obj))(zend_class_entry *class_type) { \
-        return allocate_zend_obj<CLASS_TYPE>(class_type, &M_CONC(php_, M_CONC(CLASS_NAME, _handlers))); \
-    }
+    PHP_CLASS_OBJECT_HANDLERS()
 
+
+// Macros for defining required components for storing & retrieving the php <--> c++ object mapping
+
+/*
+ * Defines handler list for constructing php land objects using the type specified with #define CLASS_TYPE.
+ */
+#define PHP_CLASS_OBJECT_HANDLERS() \
+    PHP_CLASS_OBJECT_HANDLERS_TYPE(CLASS_TYPE)
+
+/*
+ * Defines handler list for constructing php land objects with the specified type.
+ */
+#define PHP_CLASS_OBJECT_HANDLERS_TYPE(type) \
+    PHP_CLASS_OBJECT_HANDLERS_TYPE_EX(type, CLASS_NAME)
+
+/*
+ * Defines handler list for constructing php land objects with the specified name and type.
+ */
+#define PHP_CLASS_OBJECT_HANDLERS_TYPE_EX(type, name) \
+    zend_object_handlers M_CONC(php_, M_CONC(name, _handlers)); \
+    static zend_object *M_CONC(allocate_, M_CONC(name, _zend_obj))(zend_class_entry *class_type) { \
+        return allocate_zend_obj<type>(class_type, &M_CONC(php_, M_CONC(name, _handlers))); \
+    }
 
 // Macros for defining class methods
 
