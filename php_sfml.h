@@ -9,19 +9,12 @@
 #include "config.h"
 #endif
 
-#include "php.h"
-#include "php_ini.h"
-#include "SAPI.h"
-#include "ext/standard/info.h"
-#include "zend_exceptions.h"
-#include "zend_extensions.h"
+#include "src/zend_includes.h"
 
 extern zend_module_entry sfml_module_entry;
 #define phpext_sfml_ptr &sfml_module_entry
 
 #define PHP_SFML_VERSION "0.0.1"
-
-#define PHP_MINIT_CALL(func) PHP_MINIT(func)(INIT_FUNC_ARGS_PASSTHRU)
 
 #ifdef ZTS
 #include "TSRM.h"

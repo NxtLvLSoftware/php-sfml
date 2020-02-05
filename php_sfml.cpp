@@ -5,6 +5,8 @@
 #include "src/config.h"
 #include "src/system/system.h"
 
+#include "php_sfml.h"
+
 /* {{{ PHP_MINIT_FUNCTION
  */
 PHP_MINIT_FUNCTION(sfml)

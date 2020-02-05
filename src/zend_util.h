@@ -5,9 +5,7 @@
 #ifndef PHP_SFML_ZEND_UTIL_H
 #define PHP_SFML_ZEND_UTIL_H
 
-extern "C"{
-#include "../php_sfml.h"
-};
+#include "zend_includes.h"
 
 #ifndef CLASS_NAME
 #define CLASS_NAME M_CONC(Php, CLASS_TYPE)
