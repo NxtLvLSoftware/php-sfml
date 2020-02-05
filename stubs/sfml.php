@@ -1,0 +1,7 @@
+<?php
+
+const SFML_VERSION_MAJOR = 2;
+
+const SFML_VERSION_MINOR = 5;
+
+const SFML_VERSION_PATCH = 1;
