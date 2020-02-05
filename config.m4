@@ -29,9 +29,17 @@ if test "$PHP_SFML" != "no"; then
         if test -r $path/$PHP_LIBDIR/lib$l.a || test -r $path/$PHP_LIBDIR/lib$l.$SHLIB_SUFFIX_NAME; then
           LIB_DIR=$path/$PHP_LIBDIR
         elif test -r $path/lib$l.a || test -r $path/lib$l.$SHLIB_SUFFIX_NAME; then
-          LIB_DIR=$p
+          LIB_DIR=$path
         else
-          FOUND_LIBS="no"
+          for j in "lib/x86_64-linux-gnu" "lib/x86_64-linux-gnu"; do
+            if test -r $path/$j/lib$l.a || test -r $path/$j/lib$l.$SHLIB_SUFFIX_NAME; then
+              LIB_DIR=$path/$j
+              FOUND_LIBS="yes"
+            else
+              FOUND_LIBS="no"
+              break;
+            fi
+          done
         fi
       done
 
