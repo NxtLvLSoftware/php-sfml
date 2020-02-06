@@ -278,7 +278,7 @@ static inline zend_class_entry *register_zend_class(zend_object_handlers *handle
  * Register an interface to the zend engine.
  */
 #define SIMPLE_REGISTER_INTERFACE_SET_ENTRY(name) \
-    REGISTER_CLASS_SET_ENTRY(name); \
+    SIMPLE_REGISTER_CLASS_SET_ENTRY(name); \
     M_CONC(CLASS_NAME, _entry)->ce_flags |= ZEND_ACC_INTERFACE;
 
 /*
