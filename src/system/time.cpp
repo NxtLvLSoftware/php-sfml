@@ -99,12 +99,12 @@ PHP_FUNCTION(microseconds) {
 
 PHP_MINIT_FUNCTION(sfml_system_time) {
     REGISTER_FUNCTION_ENTRY_START()
-        REGISTER_FUNCTION_ENTRY(__construct)
-        REGISTER_FUNCTION_ENTRY(asSeconds)
-        REGISTER_FUNCTION_ENTRY(asMilliseconds)
-        REGISTER_FUNCTION_ENTRY(asMicroseconds)
+        REGISTER_FUNCTION_ENTRY_EX(__construct)
+        REGISTER_FUNCTION_ENTRY_EX(asSeconds)
+        REGISTER_FUNCTION_ENTRY_EX(asMilliseconds)
+        REGISTER_FUNCTION_ENTRY_EX(asMicroseconds)
 
-        REGISTER_FUNCTION_ENTRY(zero)
+        REGISTER_FUNCTION_ENTRY_EX(zero)
     REGISTER_FUNCTION_ENTRY_END();
 
     REGISTER_CLASS_WITH_HANDLERS_SET_ENTRY("sf\\Time");
