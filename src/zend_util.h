@@ -246,24 +246,30 @@ static inline zend_class_entry *register_zend_class(zend_object_handlers *handle
     M_CONC(CLASS_NAME, _entry) = register_zend_class<CLASS_TYPE>(name, php_methods)
 
 /*
+ * Register a class to the zend engine.
+ */
+#define SIMPLE_REGISTER_CLASS_SET_ENTRY(name) \
+    M_CONC(CLASS_NAME, _entry) = register_zend_class(name, php_methods)
+
+/*
  * Register an abstract class to the zend engine.
  */
-#define REGISTER_ABSTRACT_CLASS_SET_ENTRY(name) \
+#define SIMPLE_REGISTER_ABSTRACT_CLASS_SET_ENTRY(name) \
     REGISTER_CLASS_SET_ENTRY(name) \
     M_CONC(CLASS_NAME, _entry)->ce_flags |= ZEND_ACC_ABSTRACT;
 
 /*
  * Register an interface to the zend engine.
  */
-#define REGISTER_INTERFACE_SET_ENTRY(name) \
-    REGISTER_CLASS_SET_ENTRY(name) \
+#define SIMPLE_REGISTER_INTERFACE_SET_ENTRY(name) \
+    REGISTER_CLASS_SET_ENTRY(name); \
     M_CONC(CLASS_NAME, _entry)->ce_flags |= ZEND_ACC_INTERFACE;
 
 /*
  * Register a trait to the zend engine.
  */
-#define REGISTER_TRAIT_SET_ENTRY(name) \
-    REGISTER_CLASS_SET_ENTRY(name) \
+#define SIMPLE_REGISTER_TRAIT_SET_ENTRY(name) \
+    SIMPLE_REGISTER_CLASS_SET_ENTRY(name) \
     M_CONC(CLASS_NAME, _entry)->ce_flags |= ZEND_ACC_TRAIT;
 
 /*
