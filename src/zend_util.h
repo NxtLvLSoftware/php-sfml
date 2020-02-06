@@ -81,14 +81,12 @@ static inline void deallocate_zend_obj(zend_object *obj) {
 /**
  * A helper function to register a class to the zend engine.
  *
- * @tparam T         The C++ class being encapsulated.
  * @param handlers   A pointer to the zend object handlers.
  * @param name       The name/namespace of the class.
  * @param functions  A pointer to the classes method definitions.
  *
  * @return Pointer to the zend class entry.
  */
-template<class T>
 static inline zend_class_entry *register_zend_class(const char *name, zend_function_entry *functions) {
     zend_class_entry ce;
     INIT_CLASS_ENTRY_EX(ce, name, strlen(name), functions);
@@ -113,7 +111,7 @@ static inline zend_class_entry *register_zend_class(zend_object_handlers *handle
     handlers->offset = XtOffsetOf(class_obj<T>, std);
     handlers->free_obj = deallocate_zend_obj<T>;
 
-    zend_class_entry *ce = register_zend_class<T>(name, functions);
+    zend_class_entry *ce = register_zend_class(name, functions);
     ce->create_object = class_zend_allocation;
     return ce;
 }
