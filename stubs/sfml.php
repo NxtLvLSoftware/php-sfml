@@ -22,6 +22,19 @@ class Clock{
 }
 
 namespace sf {
+interface InputStream{
+
+	public function read(?string &$data, int $size) : int;
+
+	public function seek(int $position) : int;
+
+	public function tell() : int;
+
+	public function getSize() : int;
+}
+}
+
+namespace sf {
 class Time{
 
 	public function __construct(){}
