@@ -195,12 +195,18 @@ static inline zend_class_entry *register_zend_class(zend_object_handlers *handle
     void ZEND_MN_CONC(CLASS_NAME, name)(INTERNAL_FUNCTION_PARAMETERS)
 
 /*
+ * Performs PHP_METHOD functionality for interface methods without duplicating the class name & keeping flags definition hidden.
+ */
+#define PHP_INTERFACE_METHOD_EX(name, flags) \
+    php_class_method_definition M_CONC(php_, M_CONC(CLASS_NAME, _##name##_method)) = { flags };
+
+/*
  * Performs PHP_METHOD functionality whilst keeping method flags in the same
  * area of code as method definition.
  */
 #define PHP_CLASS_METHOD_EX(name, flags) \
     php_class_method_definition M_CONC(php_, M_CONC(CLASS_NAME, _##name##_method)) = { flags }; \
-    void ZEND_MN_CONC(CLASS_NAME, name)(INTERNAL_FUNCTION_PARAMETERS)
+    PHP_CLASS_METHOD(name)
 
 
 // Macros to provide consistent functionality for declaring php land functions that reduce duplicate arguments.
@@ -221,6 +227,18 @@ static inline zend_class_entry *register_zend_class(zend_object_handlers *handle
  * Add class function definition.
  */
 #define REGISTER_FUNCTION_ENTRY(name) \
+    { #name, ZEND_MN_CONC(CLASS_NAME, name), M_CONC(ARG_INFO_PREFIX, name), (uint32_t) (sizeof(M_CONC(ARG_INFO_PREFIX, name))/sizeof(struct _zend_internal_arg_info)-1), NULL },
+
+/*
+ * Add class function definition.
+ */
+#define REGISTER_INTERFACE_FUNCTION_ENTRY(name) \
+    { #name, NULL, M_CONC(ARG_INFO_PREFIX, name), (uint32_t) (sizeof(M_CONC(ARG_INFO_PREFIX, name))/sizeof(struct _zend_internal_arg_info)-1), { ZEND_ACC_PUBLIC | ZEND_ACC_ABSTRACT } },
+
+/*
+ * Add class function definition.
+ */
+#define REGISTER_FUNCTION_ENTRY_EX(name) \
     { #name, ZEND_MN_CONC(CLASS_NAME, name), M_CONC(ARG_INFO_PREFIX, name), (uint32_t) (sizeof(M_CONC(ARG_INFO_PREFIX, name))/sizeof(struct _zend_internal_arg_info)-1), M_CONC(M_CONC(php_, CLASS_NAME), _##name##_method.flags) },
 
 /*
