@@ -15,7 +15,6 @@ PHP_FUNCTION(sleep) {
             Z_PARAM_OBJECT_OF_CLASS(duration, Time_entry)
     ZEND_PARSE_PARAMETERS_END();
 
-    object_init_ex(return_value, Time_entry);
     FETCH_PHP_OBJECT_VAR_OTHER_EX(sf::Time, new_intern, duration);
 
     sf::sleep(*new_intern->container);
