@@ -231,7 +231,7 @@ static inline zend_class_entry *register_zend_class(zend_object_handlers *handle
  * Add class function definition.
  */
 #define REGISTER_INTERFACE_FUNCTION_ENTRY(name) \
-    { #name, NULL, M_CONC(ARG_INFO_PREFIX, name), (uint32_t) (sizeof(M_CONC(ARG_INFO_PREFIX, name))/sizeof(struct _zend_internal_arg_info)-1), { ZEND_ACC_PUBLIC | ZEND_ACC_ABSTRACT } },
+    { #name, NULL, M_CONC(ARG_INFO_PREFIX, name), (uint32_t) (sizeof(M_CONC(ARG_INFO_PREFIX, name))/sizeof(struct _zend_internal_arg_info)-1), ZEND_ACC_PUBLIC | ZEND_ACC_ABSTRACT },
 
 /*
  * Add class function definition.
